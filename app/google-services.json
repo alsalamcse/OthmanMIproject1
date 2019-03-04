@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "187205149725",
+    "firebase_url": "https://othmanmiproject.firebaseio.com",
+    "project_id": "othmanmiproject",
+    "storage_bucket": "othmanmiproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187205149725:android:7a071e2adb08d1ab",
+        "android_client_info": {
+          "package_name": "com.othman.markit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187205149725-q8v589me4dd8ig90k4pna2pv7scuf961.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.othman.markit",
+            "certificate_hash": "8d4e87598d212bdb282d05faa7766dc9c486dbdf"
+          }
+        },
+        {
+          "client_id": "187205149725-scn87kceaiufmmh0ee2o9i59lgv06po9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFaRBbg74LjkFDP4NZ9LMpVGhfl9UIQTA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187205149725-scn87kceaiufmmh0ee2o9i59lgv06po9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
