@@ -5,7 +5,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,10 +24,10 @@ private ImageView imageView2;
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toLogActivity=new Intent(getBaseContext(),LogActivity.class);
-                startActivity(toLogActivity);
-            }
+                Intent toLogActivity = new Intent(FirstActivity.this,SignUpActivity.class);
+        startActivity(toLogActivity);
+        }
         });
 
-    }
-}
+        }
+        }

@@ -4,15 +4,16 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.lang.reflect.Member;
 
-public class GroupInfo {
+public class GroupInfo extends User {
     private static String groupName;
-    private static String member;
-   private static FirebaseAuth auth=FirebaseAuth.getInstance();
+    private static String user;
 
 
-    public GroupInfo(String groupName,Member member){
+
+    public GroupInfo(String memberName,String lastname,User user){
+        super(memberName,lastname);
         this.groupName=groupName;
-        this.member=auth.getCurrentUser().getEmail();
+
     }
 
 
@@ -21,20 +22,10 @@ public class GroupInfo {
         this.groupName = groupName;
     }
 
-
-
-    public void setMember(String member) {
-        this.member = member;
-    }
-
-
-
     public String getGroupName() {
         return groupName;
     }
 
 
-    public String getMember() {
-        return member;
-    }
+
 }

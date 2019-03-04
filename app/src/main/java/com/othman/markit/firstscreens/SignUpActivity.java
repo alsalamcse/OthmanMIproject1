@@ -1,6 +1,7 @@
 package com.othman.markit.firstscreens;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,18 +15,34 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.othman.markit.R;
 import com.othman.markit.firstscreens.appscreens.MainActivity;
+import com.othman.markit.firstscreens.appscreens.groupAndItemsClasses.User;
 
-public class LogActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private EditText Fname,Lname,email,password;
+    private DatabaseReference databaseReference;
+
     private Button save;
     FirebaseAuth auth;
     FirebaseUser user;
+    String name=Fname.getText().toString();
+    String lastname=Lname.getText().toString();
+    String email122=email.getText().toString();
+    String password122=password.getText().toString();
+public SignUpActivity(String name1, String lastname){
+    this.name=name;
+    this.lastname= this.lastname;
+
+}
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log);
+        setContentView(R.layout.activity_signup);
         Fname=(EditText)findViewById(R.id.Fname);
         Lname=(EditText)findViewById(R.id.Lname);
         email=(EditText)findViewById(R.id.email);
@@ -33,6 +50,8 @@ public class LogActivity extends AppCompatActivity {
         save=(Button)findViewById(R.id.Save);
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
+        databaseReference=FirebaseDatabase.getInstance().getReference();
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,11 +59,16 @@ public class LogActivity extends AppCompatActivity {
 
                 String Email = email.getText().toString();
                String Password = password.getText().toString();
+               String firstname=Fname.getText().toString();
+               String lastName=Lname.getText().toString();
                 if(Password.length()>8&&Email.contains("@")) {
                     SignIN(Email, Password);
-                    Intent intent2=new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent2);
+                    saveUserInfo(firstname,lastName);
 
+
+                }
+                else{
+                    Toast.makeText(SignUpActivity.this, "please check your email and password", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -58,13 +82,23 @@ public class LogActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    Toast.makeText(LogActivity.this, "Welcome to MarkIt", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Welcome to MarkIt", Toast.LENGTH_SHORT).show();
+
+                    Intent intent3=new Intent(SignUpActivity.this,MainActivity.class);
+                    startActivity(intent3);
+
 
                 }
 
             }
         });
     }
+     public void saveUserInfo(String firstName,String LastName){
+         User user=new User(firstName,LastName);
+         databaseReference.child(name).setValue(user);
+
+
+     }
 
 
 }
