@@ -27,6 +27,7 @@
         <activity android:name=".firstscreens.appscreens.MainActivity" />
         <activity android:name=".firstscreens.appscreens.GroupNameActivity" />
         <activity android:name=".firstscreens.appscreens.ShowAllTasksActivity" />
+        <activity android:name=".firstscreens.appscreens.GroupActivity"></activity>
     </application>
 
 </manifest>

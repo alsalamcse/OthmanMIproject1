@@ -24,8 +24,9 @@ private ImageView imageView2;
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toLogActivity = new Intent(FirstActivity.this,SignUpActivity.class);
-        startActivity(toLogActivity);
+                Intent intent2SignUp= new Intent(FirstActivity.this,SignUpActivity.class);
+                startActivity(intent2SignUp);
+
         }
         });
 

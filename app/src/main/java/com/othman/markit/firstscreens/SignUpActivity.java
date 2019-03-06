@@ -5,6 +5,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,15 +30,9 @@ public class SignUpActivity extends AppCompatActivity {
     private Button save;
     FirebaseAuth auth;
     FirebaseUser user;
-    String name=Fname.getText().toString();
-    String lastname=Lname.getText().toString();
-    String email122=email.getText().toString();
-    String password122=password.getText().toString();
-public SignUpActivity(String name1, String lastname){
-    this.name=name;
-    this.lastname= this.lastname;
 
-}
+
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -75,7 +70,11 @@ public SignUpActivity(String name1, String lastname){
         });
 
     }
-    public void SignIN(String Email,String Password) {
+
+
+
+
+    public void SignIN(String Email, String Password) {
         FirebaseAuth auth=FirebaseAuth.getInstance();
 
         auth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -86,8 +85,12 @@ public SignUpActivity(String name1, String lastname){
 
                     Intent intent3=new Intent(SignUpActivity.this,MainActivity.class);
                     startActivity(intent3);
+                    finish();
 
 
+                }
+                else {
+                    Toast.makeText(SignUpActivity.this, "Check email and password", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -95,7 +98,7 @@ public SignUpActivity(String name1, String lastname){
     }
      public void saveUserInfo(String firstName,String LastName){
          User user=new User(firstName,LastName);
-         databaseReference.child(name).setValue(user);
+         databaseReference.child(Fname.getText().toString()).setValue(user);
 
 
      }
