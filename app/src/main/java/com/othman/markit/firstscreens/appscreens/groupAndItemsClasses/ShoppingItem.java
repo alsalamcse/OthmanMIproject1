@@ -5,7 +5,7 @@ import android.widget.ImageButton;
 
 public class ShoppingItem {
 
-    public ImageButton imageButton;
+
     public String itemName;
     public Image image;
 

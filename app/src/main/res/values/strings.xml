@@ -28,4 +28,7 @@
     <string name="log_in">Log in</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="create_group">create group</string>
+    <string name="sittengs">Sittengs</string>
+    <string name="select_group_members">select group members:</string>
 </resources>

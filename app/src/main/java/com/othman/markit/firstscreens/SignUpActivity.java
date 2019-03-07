@@ -27,9 +27,10 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText Fname,Lname,email,password;
     private DatabaseReference databaseReference;
 
-    private Button save;
-    FirebaseAuth auth;
-    FirebaseUser user;
+
+    private Button save,test;
+   private FirebaseAuth auth;
+   private FirebaseUser user;
 
 
 
@@ -43,22 +44,28 @@ public class SignUpActivity extends AppCompatActivity {
         email=(EditText)findViewById(R.id.email);
         password=(EditText)findViewById(R.id.password);
         save=(Button)findViewById(R.id.Save);
+        test=(Button)findViewById(R.id.test);
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tomain=new Intent(SignUpActivity.this,MainActivity.class);
+                startActivity(tomain);
+            }
+        });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String Email = email.getText().toString();
-               String Password = password.getText().toString();
-               String firstname=Fname.getText().toString();
-               String lastName=Lname.getText().toString();
-                if(Password.length()>8&&Email.contains("@")) {
-                    SignIN(Email, Password);
-                    saveUserInfo(firstname,lastName);
+
+                if(password.getText().toString().length()>8&&email.getText().toString().contains("@")) {
+                    SignIN(email.getText().toString() ,password.getText().toString());
+                    saveUserInfo(Fname.getText().toString(),Lname.getText().toString());
 
 
                 }

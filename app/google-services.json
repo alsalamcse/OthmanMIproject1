@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "187205149725-0th0hokerpl0flm5omaag6178ep3jptu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.othman.markit",
+            "certificate_hash": "19030bb427020e4e29642ebfec5dd246cd529e57"
+          }
+        },
+        {
           "client_id": "187205149725-scn87kceaiufmmh0ee2o9i59lgv06po9.apps.googleusercontent.com",
           "client_type": 3
         }

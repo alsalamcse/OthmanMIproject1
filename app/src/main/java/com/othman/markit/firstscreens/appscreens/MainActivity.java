@@ -23,4 +23,25 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
 
-    }}
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuformainactivity,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.createGroup:
+                Intent toGroupNameActivity=new Intent(MainActivity.this,GroupNameActivity.class);
+                startActivity(toGroupNameActivity);
+                return true;
+
+
+
+        }
+return true;
+    }
+}
