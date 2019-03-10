@@ -42,7 +42,7 @@ ArrayAdapter<String> adapter;
         databaseReference=FirebaseDatabase.getInstance().getReference();
         membersListView.setAdapter(adapter);
 
-        membersListView.addView(GroupMember);
+
     }
 
     @Override
@@ -58,6 +58,6 @@ ArrayAdapter<String> adapter;
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        })
+        });
     }
 }
