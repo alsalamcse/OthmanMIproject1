@@ -31,4 +31,5 @@
     <string name="create_group">create group</string>
     <string name="sittengs">Sittengs</string>
     <string name="select_group_members">select group members:</string>
+    <string name="sign_in">Sign in</string>
 </resources>

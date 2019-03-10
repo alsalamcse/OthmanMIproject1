@@ -90,10 +90,6 @@ public class SignUpActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(SignUpActivity.this, "Welcome to MarkIt", Toast.LENGTH_SHORT).show();
 
-                    Intent intent3=new Intent(SignUpActivity.this,MainActivity.class);
-                    startActivity(intent3);
-                    finish();
-
 
                 }
                 else {
@@ -105,7 +101,18 @@ public class SignUpActivity extends AppCompatActivity {
     }
      public void saveUserInfo(String firstName,String LastName){
          User user=new User(firstName,LastName);
-         databaseReference.child(Fname.getText().toString()).setValue(user);
+         databaseReference.child(email.getText().toString()).child(firstName).child(LastName).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+             @Override
+             public void onComplete(@NonNull Task<Void> task) {
+                 if (task.isSuccessful()){
+                     Toast.makeText(SignUpActivity.this, "hello", Toast.LENGTH_SHORT).show();
+
+                 }
+                 else{
+                     Toast.makeText(SignUpActivity.this, "check your first name and last name", Toast.LENGTH_SHORT).show();
+                 }
+             }
+         });
 
 
      }

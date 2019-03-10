@@ -19,7 +19,7 @@ FirebaseAuth auth;
         imageView=(ImageView)findViewById(R.id.imageView);
         auth=FirebaseAuth.getInstance();
         if (auth.getCurrentUser()!=null&&auth.getCurrentUser().getEmail()!=null){
-            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            Intent intent=new Intent(getApplicationContext(),LogInAcivity.class);
 
         }
         Thread splashThread = new Thread() {

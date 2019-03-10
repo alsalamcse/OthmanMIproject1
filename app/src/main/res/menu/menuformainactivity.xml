@@ -11,6 +11,11 @@
         android:id="@+id/settings"
         android:title="@string/sittengs"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/addFriendMenu"
+        android:title="Add friend"
+        app:showAsAction="never"/>
+
 
 
 </menu>

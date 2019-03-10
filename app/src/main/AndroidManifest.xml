@@ -27,7 +27,10 @@
         <activity android:name=".firstscreens.appscreens.MainActivity" />
         <activity android:name=".firstscreens.appscreens.GroupNameActivity" />
         <activity android:name=".firstscreens.appscreens.ShowAllTasksActivity" />
-        <activity android:name=".firstscreens.appscreens.GroupActivity"></activity>
+        <activity android:name=".firstscreens.appscreens.GroupActivity" />
+        <activity android:name=".firstscreens.LogInAcivity" />
+        <activity android:name=".firstscreens.appscreens.AddFriendActivity" />
+        <activity android:name=".firstscreens.appscreens.UserInfoActivity"></activity>
     </application>
 
 </manifest>

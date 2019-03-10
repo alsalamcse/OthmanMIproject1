@@ -34,10 +34,16 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            case R.id.addFriendMenu:
+                Intent toAddFriendActivity=new Intent(MainActivity.this,AddFriendActivity.class);
+                startActivity(toAddFriendActivity);
+                return true;
             case R.id.createGroup:
                 Intent toGroupNameActivity=new Intent(MainActivity.this,GroupNameActivity.class);
                 startActivity(toGroupNameActivity);
                 return true;
+
+
 
 
 
