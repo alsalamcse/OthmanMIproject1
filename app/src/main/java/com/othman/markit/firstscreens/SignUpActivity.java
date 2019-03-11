@@ -61,27 +61,28 @@ public class SignUpActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                if(password.getText().toString().length()>8&&email.getText().toString().contains("@")) {
-                    SignIN(email.getText().toString() ,password.getText().toString());
-                    saveUserInfo(Fname.getText().toString(),Lname.getText().toString());
-
-
-                }
-                else{
-                    Toast.makeText(SignUpActivity.this, "please check your email and password", Toast.LENGTH_SHORT).show();
-                }
+                insertInfo();
+                    Toast.makeText(SignUpActivity.this, "hi", Toast.LENGTH_SHORT).show();
+                Intent toMainActivityfromSignUpActivity=new Intent(SignUpActivity.this,MainActivity.class);
+                startActivity(toMainActivityfromSignUpActivity);
 
             }
         });
 
     }
+    public void insertInfo(){
+       String email1=email.getText().toString();
+       String password1=password.getText().toString();
+        String firstname=Fname.getText().toString();
+        String lastname=Lname.getText().toString();
+        SignUp(email1,password1);
+        saveUserInfo(firstname,lastname);
+    }
 
 
 
 
-    public void SignIN(String Email, String Password) {
+    public void SignUp(String Email, String Password) {
         FirebaseAuth auth=FirebaseAuth.getInstance();
 
         auth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -99,9 +100,11 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
+
      public void saveUserInfo(String firstName,String LastName){
          User user=new User(firstName,LastName);
-         databaseReference.child(email.getText().toString()).child(firstName).child(LastName).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+         databaseReference.child(email.getText().toString().replace('.','*')).child(firstName).child(LastName).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
              @Override
              public void onComplete(@NonNull Task<Void> task) {
                  if (task.isSuccessful()){
