@@ -1,8 +1,4 @@
-package com.othman.markit.firstscreens.appscreens.groupAndItemsClasses;
-
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.lang.reflect.Member;
+package com.othman.markit.firstscreens.groupAndItemsClasses;
 
 public class GroupInfo extends User {
     private static String groupName;

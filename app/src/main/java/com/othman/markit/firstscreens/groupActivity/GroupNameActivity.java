@@ -1,23 +1,20 @@
-package com.othman.markit.firstscreens.appscreens;
+package com.othman.markit.firstscreens.groupActivity;
 
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.othman.markit.R;
-import com.othman.markit.firstscreens.appscreens.groupAndItemsClasses.User;
+import com.othman.markit.firstscreens.groupAndItemsClasses.User;
 
 import java.util.ArrayList;
 
@@ -26,7 +23,7 @@ private TextView textView;
 private ListView membersListView;
 private EditText groupName;
 private User GroupMember;
-DatabaseReference databaseReference;
+DatabaseReference groupData;
 ArrayAdapter<String> adapter;
   ArrayList<String> list=new ArrayList<String>();
 
@@ -39,25 +36,28 @@ ArrayAdapter<String> adapter;
         textView=(TextView)findViewById(R.id.textView);
         groupName=(EditText)findViewById(R.id.editText2);
         adapter=new ArrayAdapter<String>(this,R.layout.activity_group_name,list);
-        databaseReference=FirebaseDatabase.getInstance().getReference();
+        groupData=FirebaseDatabase.getInstance().getReference();
         membersListView.setAdapter(adapter);
 
 
     }
+    public void GroupInfo()
+    {
+        String GroupName=groupName.getText().toString();
+        CreateGroup(GroupName);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        databaseReference.addValueEventListener(new ValueEventListener() {
+    }
+
+
+    private void CreateGroup(String groupName)
+    {
+        groupData.child("Groups").child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(GroupNameActivity.this, "The group created successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 }

@@ -1,7 +1,4 @@
-package com.othman.markit.firstscreens.appscreens.groupAndItemsClasses;
-
-import com.google.firebase.database.DatabaseReference;
-import com.othman.markit.firstscreens.SignUpActivity;
+package com.othman.markit.firstscreens.groupAndItemsClasses;
 
 public class User{
     private String name;

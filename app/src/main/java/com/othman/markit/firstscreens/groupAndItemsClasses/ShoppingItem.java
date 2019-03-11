@@ -1,7 +1,6 @@
-package com.othman.markit.firstscreens.appscreens.groupAndItemsClasses;
+package com.othman.markit.firstscreens.groupAndItemsClasses;
 
 import android.media.Image;
-import android.widget.ImageButton;
 
 public class ShoppingItem {
 

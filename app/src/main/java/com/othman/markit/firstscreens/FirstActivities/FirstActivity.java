@@ -1,4 +1,4 @@
-package com.othman.markit.firstscreens;
+package com.othman.markit.firstscreens.FirstActivities;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;

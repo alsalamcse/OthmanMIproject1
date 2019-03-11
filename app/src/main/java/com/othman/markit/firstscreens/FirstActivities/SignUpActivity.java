@@ -1,11 +1,9 @@
-package com.othman.markit.firstscreens;
+package com.othman.markit.firstscreens.FirstActivities;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +14,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.othman.markit.R;
 import com.othman.markit.firstscreens.appscreens.MainActivity;
-import com.othman.markit.firstscreens.appscreens.groupAndItemsClasses.User;
+import com.othman.markit.firstscreens.groupAndItemsClasses.User;
+
+import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText Fname,Lname,email,password;
@@ -89,6 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+
                     Toast.makeText(SignUpActivity.this, "Welcome to MarkIt", Toast.LENGTH_SHORT).show();
 
 
@@ -102,13 +102,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-     public void saveUserInfo(String firstName,String LastName){
+     public void saveUserInfo(final String firstName, final String LastName){
+        String emailForData=email.getText().toString();
          User user=new User(firstName,LastName);
-         databaseReference.child(email.getText().toString().replace('.','*')).child(firstName).child(LastName).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+         databaseReference.child("Users").setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
              @Override
              public void onComplete(@NonNull Task<Void> task) {
                  if (task.isSuccessful()){
                      Toast.makeText(SignUpActivity.this, "hello", Toast.LENGTH_SHORT).show();
+                     HashMap<String,String> profileInfo=new HashMap<>();
+                     profileInfo.put("First name:",firstName);
+                     profileInfo.put("Last name:",LastName);
 
                  }
                  else{

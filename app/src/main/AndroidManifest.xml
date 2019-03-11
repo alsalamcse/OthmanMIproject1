@@ -15,20 +15,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".firstscreens.SplashActivity">
+        <activity android:name=".firstscreens.FirstActivities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".firstscreens.SignUpActivity" />
-        <activity android:name=".firstscreens.FirstActivity" />
+        <activity android:name=".firstscreens.FirstActivities.SignUpActivity" />
+        <activity android:name=".firstscreens.FirstActivities.FirstActivity" />
         <activity android:name=".firstscreens.appscreens.MainActivity" />
-        <activity android:name=".firstscreens.appscreens.GroupNameActivity" />
+        <activity android:name=".firstscreens.groupActivity.GroupNameActivity" />
         <activity android:name=".firstscreens.appscreens.ShowAllTasksActivity" />
-        <activity android:name=".firstscreens.appscreens.GroupActivity" />
-        <activity android:name=".firstscreens.LogInAcivity" />
+        <activity android:name=".firstscreens.groupActivity.GroupActivity" />
+        <activity android:name=".firstscreens.FirstActivities.LogInAcivity" />
         <activity android:name=".firstscreens.appscreens.AddFriendActivity" />
         <activity android:name=".firstscreens.appscreens.UserInfoActivity"></activity>
     </application>
