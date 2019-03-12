@@ -19,6 +19,7 @@ FirebaseAuth auth;
         auth=FirebaseAuth.getInstance();
         if (auth.getCurrentUser()!=null&&auth.getCurrentUser().getEmail()!=null){
             Intent intent=new Intent(getApplicationContext(),LogInAcivity.class);
+            startActivity(intent);
 
         }
         else{

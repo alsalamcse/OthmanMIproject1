@@ -105,12 +105,13 @@ public class SignUpActivity extends AppCompatActivity {
      public void saveUserInfo(final String firstName, final String LastName){
         String emailForData=email.getText().toString();
          User user=new User(firstName,LastName);
-         databaseReference.child("Users").setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+         databaseReference.child("Users").setValue(firstName,LastName).addOnCompleteListener(new OnCompleteListener<Void>() {
              @Override
              public void onComplete(@NonNull Task<Void> task) {
-                 if (task.isSuccessful()){
+                 if (task.isSuccessful())
+                 {
                      Toast.makeText(SignUpActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                     HashMap<String,String> profileInfo=new HashMap<>();
+                     HashMap<String,String> profileInfo=new HashMap<String, String>();
                      profileInfo.put("First name:",firstName);
                      profileInfo.put("Last name:",LastName);
 
