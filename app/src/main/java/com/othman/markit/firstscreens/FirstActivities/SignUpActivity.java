@@ -14,8 +14,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.othman.markit.R;
 import com.othman.markit.firstscreens.appscreens.MainActivity;
 import com.othman.markit.firstscreens.groupAndItemsClasses.User;
@@ -46,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
         test=(Button)findViewById(R.id.test);
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
+
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
@@ -74,21 +78,32 @@ public class SignUpActivity extends AppCompatActivity {
        String password1=password.getText().toString();
         String firstname=Fname.getText().toString();
         String lastname=Lname.getText().toString();
+        if (password1.length()<8){
+            Toast.makeText(this, "Password length must be more than 8 numbers ", Toast.LENGTH_SHORT).show();
+        }
+        if (!email1.contains("@")&&!email1.contains("gmail")||!email1.contains("hotmail")){
+            Toast.makeText(this, "email is not correct please check if your email has '@' or 'gmail' or 'hotmail", Toast.LENGTH_SHORT).show();
+
+        }
+        if (password1.length()>8&&email1.contains("@")||email1.contains("hotmail")||email1.contains("gmail")){
         SignUp(email1,password1);
-        saveUserInfo(firstname,lastname);
+        }
+//        saveUserInfo(firstname,lastname);
     }
 
 
 
 
     public void SignUp(String Email, String Password) {
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-
+        final FirebaseAuth auth=FirebaseAuth.getInstance();
+        final String lastName=Lname.getText().toString();
+        final String name=Fname.getText().toString();
         auth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-
+                    final String id=auth.getCurrentUser().getUid();
+                    databaseReference.child("Users:").child(id).setValue(name,lastName);
                     Toast.makeText(SignUpActivity.this, "Welcome to MarkIt", Toast.LENGTH_SHORT).show();
 
 
@@ -102,29 +117,28 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-     public void saveUserInfo(final String firstName, final String LastName){
-        String emailForData=email.getText().toString();
-         User user=new User(firstName,LastName);
-         databaseReference.child("Users").setValue(firstName,LastName).addOnCompleteListener(new OnCompleteListener<Void>() {
-             @Override
-             public void onComplete(@NonNull Task<Void> task) {
-                 if (task.isSuccessful())
-                 {
-                     Toast.makeText(SignUpActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                     HashMap<String,String> profileInfo=new HashMap<String, String>();
-                     profileInfo.put("First name:",firstName);
-                     profileInfo.put("Last name:",LastName);
-
-                 }
-                 else{
-                     Toast.makeText(SignUpActivity.this, "check your first name and last name", Toast.LENGTH_SHORT).show();
-                 }
-             }
-         });
-
-
-     }
-
+//     public void saveUserInfo(final String firstName, final String LastName){
+//        String emailForData=email.getText().toString();
+//         User user=new User(firstName,LastName);
+//        databaseReference.child("Users:").child(firstName).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                Toast.makeText(SignUpActivity.this, "hello", Toast.LENGTH_SHORT).show();
+//                databaseReference.child("Users:").setValue(firstName);
+//                HashMap<String,String> profileInfo=new HashMap<>();
+//                profileInfo.put("First name:",firstName);
+//                profileInfo.put("Last name:",LastName);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//
+//     }
 
 }
 
