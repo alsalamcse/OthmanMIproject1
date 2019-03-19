@@ -94,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
-    public void SignUp(String Email, String Password) {
+    public void SignUp(final String Email, String Password) {
         final FirebaseAuth auth=FirebaseAuth.getInstance();
         final String lastName=Lname.getText().toString();
         final String name=Fname.getText().toString();
@@ -106,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                     HashMap<String,String> hashMap=new HashMap<>();
                     hashMap.put("First name",name);
                     hashMap.put("Last name",lastName);
+                    hashMap.put("User id",Email);
                     databaseReference.child("Users:").child(id).setValue(hashMap);
                     Toast.makeText(SignUpActivity.this, "Welcome to MarkIt", Toast.LENGTH_SHORT).show();
 
