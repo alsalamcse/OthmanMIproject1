@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,10 +40,11 @@ DatabaseReference groupRef;
         groupRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Set<String> set=new HashSet<>();
+              String user=dataSnapshot.getChildren().iterator().toString();
                 Iterator iterator=dataSnapshot.getChildren().iterator();
                 while (iterator.hasNext()){
-                    set.add(((DataSnapshot)iterator.next()).getKey());
+                 arrayList.add(user);
+                    Toast.makeText(GroupActivity.this, "damn", Toast.LENGTH_SHORT).show();
 
                 }
 

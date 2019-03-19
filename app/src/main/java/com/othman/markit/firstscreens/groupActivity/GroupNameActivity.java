@@ -24,8 +24,10 @@ import com.othman.markit.R;
 import com.othman.markit.firstscreens.groupAndItemsClasses.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.ListIterator;
+import java.util.Set;
 
 public class GroupNameActivity extends AppCompatActivity {
 private TextView textView;
@@ -76,7 +78,7 @@ ArrayAdapter<String> adapter;
 
     private void CreateGroup(String groupName)
     {
-        groupData.child("Groups").child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
+        groupData.child("Groups").child(groupName).child("group members").setValue(groupName).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
@@ -90,24 +92,33 @@ ArrayAdapter<String> adapter;
 
 
 
-            public void getDataUsers(){
+            public void getDataUsers()
+            {
         String firstName;
-        groupData.child("Users").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+        groupData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if ((dataSnapshot.exists())&&(dataSnapshot.hasChild("Users:"))){
-
-                    String iterator=dataSnapshot.child("Users:").getValue().toString();
-                    list.add(iterator);
+                    Set<String> users=new HashSet<>();
+                    Iterator iterator=dataSnapshot.getChildren().iterator();
+                    while (iterator.hasNext()) {
+                      users.add(dataSnapshot.getChildren().iterator().next().toString());
+                    }
+                    list.clear();
+                    list.addAll(users);
                     adapter.notifyDataSetChanged();
+
+                    }
+
                 }
-            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
+
 
 
 

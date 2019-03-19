@@ -6,4 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".firstscreens.appscreens.AddFriendActivity">
 
+    <EditText
+        android:id="@+id/serchED"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="search"
+        android:inputType="textPersonName" />
+
+    <ListView
+        android:id="@+id/FriendsList"
+        android:layout_width="368dp"
+        android:layout_height="427dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="76dp">
+
+    </ListView>
 </android.support.constraint.ConstraintLayout>
