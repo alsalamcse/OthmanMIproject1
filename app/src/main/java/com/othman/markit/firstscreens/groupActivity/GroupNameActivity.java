@@ -95,14 +95,14 @@ ArrayAdapter<String> adapter;
             public void getDataUsers()
             {
         String firstName;
-        groupData.addValueEventListener(new ValueEventListener() {
+        groupData.child("Groups").child(groupName.getText().toString()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if ((dataSnapshot.exists())&&(dataSnapshot.hasChild("Users:"))){
                     Set<String> users=new HashSet<>();
                     Iterator iterator=dataSnapshot.getChildren().iterator();
-                    while (iterator.hasNext()) {
-                      users.add(dataSnapshot.getChildren().iterator().next().toString());
+                 for (DataSnapshot d:dataSnapshot.getChildren()){
+                      users.add(d.getValue().toString());
                     }
                     list.clear();
                     list.addAll(users);

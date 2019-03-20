@@ -41,6 +41,7 @@ public class AddFriendActivity extends AppCompatActivity {
         user=auth.getCurrentUser();
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
+
     }
 
 
@@ -55,12 +56,11 @@ public class AddFriendActivity extends AppCompatActivity {
 
                 Iterator iterator=dataSnapshot.getChildren().iterator();
 
-
-
-
-                    while (iterator.hasNext()){
+                    while (iterator.hasNext())
+                    {
                         if (searchPlain.contains(iterator.toString())){
                      arrayList.add(dataSnapshot.child("Users").toString());
+
                     }
 
                 }
