@@ -30,7 +30,8 @@
         <activity android:name=".firstscreens.groupActivity.GroupActivity" />
         <activity android:name=".firstscreens.FirstActivities.LogInAcivity" />
         <activity android:name=".firstscreens.appscreens.AddFriendActivity" />
-        <activity android:name=".firstscreens.appscreens.UserInfoActivity"></activity>
+        <activity android:name=".firstscreens.appscreens.UserInfoActivity" />
+        <activity android:name=".firstscreens.groupActivity.AddUsersToGroupActivity"></activity>
     </application>
 
 </manifest>

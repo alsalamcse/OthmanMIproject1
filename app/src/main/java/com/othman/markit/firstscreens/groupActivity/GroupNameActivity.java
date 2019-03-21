@@ -1,5 +1,6 @@
 package com.othman.markit.firstscreens.groupActivity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ private TextView textView;
 private ListView membersListView;
 private EditText groupName;
 private User GroupMember;
+private ImageButton imgbtn;
 FirebaseAuth auth;
 FirebaseUser user;
 DatabaseReference groupData;
@@ -47,14 +50,12 @@ ArrayAdapter<String> adapter;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_name);
 
-        membersListView= (ListView) findViewById(R.id.membersListView);
+        imgbtn=(ImageButton)findViewById(R.id.imageButton);
         textView=(TextView)findViewById(R.id.textView);
         groupName=(EditText)findViewById(R.id.editText2);
         adapter=new ArrayAdapter<String>(this,R.layout.activity_group_name,list);
         groupData=FirebaseDatabase.getInstance().getReference();
-        membersListView.setAdapter(adapter);
         auth=FirebaseAuth.getInstance();
-        user=auth.getCurrentUser();
         CreateBTN=(Button)findViewById(R.id.CreateBTN);
         CreateBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +65,21 @@ ArrayAdapter<String> adapter;
             }
         });
 
+        getDataUsers();
+        CreateBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+    imgbtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i=new Intent(GroupNameActivity.this,AddUsersToGroupActivity.class);
+            startActivity(i);
+        }
+    });
 
     }
 
@@ -83,6 +99,7 @@ ArrayAdapter<String> adapter;
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
 
+
                 Toast.makeText(GroupNameActivity.this, "The group created successfully", Toast.LENGTH_SHORT).show();
 
             }
@@ -94,14 +111,14 @@ ArrayAdapter<String> adapter;
 
             public void getDataUsers()
             {
-        String firstName;
+
         groupData.child("Groups").child(groupName.getText().toString()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if ((dataSnapshot.exists())&&(dataSnapshot.hasChild("Users:"))){
                     Set<String> users=new HashSet<>();
-                    Iterator iterator=dataSnapshot.getChildren().iterator();
                  for (DataSnapshot d:dataSnapshot.getChildren()){
+
                       users.add(d.getValue().toString());
                     }
                     list.clear();

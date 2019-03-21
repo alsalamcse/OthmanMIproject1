@@ -103,10 +103,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     final String id=auth.getCurrentUser().getUid();
-                    HashMap<String,String> hashMap=new HashMap<>();
+                    HashMap<String,String> hashMap=new HashMap<String, String>();
                     hashMap.put("First name",name);
                     hashMap.put("Last name",lastName);
                     hashMap.put("User id",Email);
+                    hashMap.put("Friends","");
                     databaseReference.child("Users:").child(id).setValue(hashMap);
                     Toast.makeText(SignUpActivity.this, "Welcome to MarkIt", Toast.LENGTH_SHORT).show();
 

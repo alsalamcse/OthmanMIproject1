@@ -3,7 +3,9 @@ package com.othman.markit.firstscreens.appscreens;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -22,6 +24,7 @@ import java.util.Iterator;
 
 public class AddFriendActivity extends AppCompatActivity {
     private EditText searchEd;
+    private Button btnSearch;
     ArrayList arrayList;
     ArrayAdapter arrayAdapter;
     ListView listView;
@@ -34,13 +37,20 @@ public class AddFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
         searchEd=(EditText)findViewById(R.id.serchED);
-        arrayAdapter=new ArrayAdapter<String>(this,R.layout.activity_add_friend);
+        arrayAdapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1);
         listView=(ListView)findViewById(R.id.FriendsList);
+        btnSearch=(Button)findViewById(R.id.search);
         listView.setAdapter(arrayAdapter);
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inforetievte();
+            }
+        });
 
     }
 
@@ -50,20 +60,22 @@ public class AddFriendActivity extends AppCompatActivity {
         searchMethod(searchPlain);
     }
     public void searchMethod(final String searchPlain){
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Users:").orderByChild("First name").equalTo(searchPlain).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    arrayAdapter.clear();
+                   for(DataSnapshot d:dataSnapshot.getChildren()){
+                       //String searchName=dataSnapshot.child("Users:").child("First name").getValue().toString();
+//                       if (searchPlain.contains(searchName)){
+//                           arrayAdapter.add(searchName);
+//                       }
+                       String value=d.child("First name").getValue().toString();
+                       String lastName=d.child("Last name").getValue().toString();
+//                       String value = d.getValue(String.class);
+                       arrayAdapter.add(value +" "+ lastName);
+                   }
 
-                Iterator iterator=dataSnapshot.getChildren().iterator();
-
-                    while (iterator.hasNext())
-                    {
-                        if (searchPlain.contains(iterator.toString())){
-                     arrayList.add(dataSnapshot.child("Users").toString());
-
-                    }
-
-                }
+                   arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
