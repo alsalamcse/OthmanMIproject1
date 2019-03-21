@@ -66,7 +66,7 @@ public class AddFriendActivity extends AppCompatActivity {
                     arrayAdapter.clear();
                    for(DataSnapshot d:dataSnapshot.getChildren()){
                        //String searchName=dataSnapshot.child("Users:").child("First name").getValue().toString();
-//                       if (searchPlain.contains(searchName)){
+//                       if (searchPlain.contains(searchxName)){
 //                           arrayAdapter.add(searchName);
 //                       }
                        String value=d.child("First name").getValue().toString();
