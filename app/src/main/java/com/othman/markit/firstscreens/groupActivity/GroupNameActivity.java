@@ -27,6 +27,7 @@ import com.othman.markit.R;
 import com.othman.markit.firstscreens.groupAndItemsClasses.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -87,7 +88,11 @@ public class GroupNameActivity extends AppCompatActivity {
         membersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                groupData.child("Groups").child(groupName.getText().toString()).child("0");
+                String groupId=auth.getCurrentUser().getUid();
+                String nameInTheList=(String) membersListView.getItemAtPosition(position);
+                HashMap<String,String> hashMap=new HashMap();
+                hashMap.put("Friend first name and last name",nameInTheList);
+                groupData.child("Groups").child(groupName.getText().toString()).child("Friends").child(nameInTheList).setValue(hashMap);
 
             }
         });
