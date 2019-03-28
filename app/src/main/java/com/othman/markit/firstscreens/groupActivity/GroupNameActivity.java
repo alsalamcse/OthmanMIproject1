@@ -60,23 +60,11 @@ public class GroupNameActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         CreateBTN = (Button) findViewById(R.id.CreateBTN);
-        CreateBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GroupInfo();
-
-            }
-        });
 
         addToListMethod();
 //        getDataUsers();
-        CreateBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
 
-            }
-        });
 
 //        imgbtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -123,13 +111,13 @@ public class GroupNameActivity extends AppCompatActivity {
 
     public void addToListMethod() {
         String currentid=auth.getCurrentUser().getUid();
-        groupData.child("Users").child(currentid).orderByChild("Friends").addValueEventListener(new ValueEventListener() {
+        groupData.child("Users:").child(currentid).orderByChild("Friends").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 adapter.clear();
-                for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    String FriendsName = d.getValue().toString();
-                    adapter.add(FriendsName);
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    String FriendsFirestName = dataSnapshot1.getValue().toString();
+                    adapter.add(FriendsFirestName);
                 }
                 adapter.notifyDataSetChanged();
             }

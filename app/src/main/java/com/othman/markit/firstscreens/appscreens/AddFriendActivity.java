@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import com.othman.markit.R;
 import com.othman.markit.firstscreens.groupAndItemsClasses.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class AddFriendActivity extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class AddFriendActivity extends AppCompatActivity {
     FirebaseUser user;
     FirebaseAuth auth;
     DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +55,29 @@ public class AddFriendActivity extends AppCompatActivity {
             }
         });
 
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String friendName=(String)listView.getItemAtPosition(position);
+                HashMap <String,String>hashMap=new HashMap<>();
+                hashMap.put("Friend's name",friendName);
+              databaseReference.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends").child(friendName).setValue(hashMap);
+            }
+        });
+
+
     }
+
 
 
     public void inforetievte(){
         String searchPlain=searchEd.getText().toString();
         searchMethod(searchPlain);
     }
+
+
+
     public void searchMethod(final String searchPlain){
         databaseReference.child("Users:").orderByChild("First name").equalTo(searchPlain).addValueEventListener(new ValueEventListener() {
             @Override
