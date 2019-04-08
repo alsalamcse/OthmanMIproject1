@@ -107,7 +107,6 @@ public class SignUpActivity extends AppCompatActivity {
                     hashMap.put("First name",name);
                     hashMap.put("Last name",lastName);
                     hashMap.put("User id",Email);
-                    hashMap.put("Friends","");
                     databaseReference.child("Users:").child(id).setValue(hashMap);
                     Toast.makeText(SignUpActivity.this, "Welcome to MarkIt", Toast.LENGTH_SHORT).show();
 

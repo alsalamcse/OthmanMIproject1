@@ -44,7 +44,7 @@ public class GroupNameActivity extends AppCompatActivity {
     DatabaseReference groupData;
     ArrayAdapter<String> adapter;
     ArrayList<String> list = new ArrayList<String>();
-    private Button CreateBTN;
+    private Button CreateBTN,chooser;
 
 
     @Override
@@ -55,15 +55,21 @@ public class GroupNameActivity extends AppCompatActivity {
 //        imgbtn = (ImageButton) findViewById(R.id.imageButton);
         textView = (TextView) findViewById(R.id.textView);
         groupName = (EditText) findViewById(R.id.editText2);
-        adapter = new ArrayAdapter<String>(this, R.layout.activity_group_name, list);
+        chooser=(Button)findViewById(R.id.choose);
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
         groupData = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
 
         CreateBTN = (Button) findViewById(R.id.CreateBTN);
 
-        addToListMethod();
-//        getDataUsers();
 
+//        getDataUsers();
+chooser.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        addToListMethod();
+    }
+});
 
 
 //        imgbtn.setOnClickListener(new View.OnClickListener() {
@@ -111,14 +117,22 @@ public class GroupNameActivity extends AppCompatActivity {
 
     public void addToListMethod() {
         String currentid=auth.getCurrentUser().getUid();
-        groupData.child("Users:").child(currentid).orderByChild("Friends").addValueEventListener(new ValueEventListener() {
+        final int numOFpos=1;
+
+        groupData.child("Users:").child(currentid).child("Friends").child(Integer.toString(numOFpos)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                adapter.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    String FriendsFirestName = dataSnapshot1.getValue().toString();
-                    adapter.add(FriendsFirestName);
+                if (numOFpos!=0) {
+                    adapter.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                        String FriendsFirestName = dataSnapshot1.getValue().toString();
+                        adapter.add(FriendsFirestName);
+
+                    }
+
                 }
+
                 adapter.notifyDataSetChanged();
             }
 

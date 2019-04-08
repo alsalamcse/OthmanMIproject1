@@ -1,5 +1,6 @@
 package com.othman.markit.firstscreens.appscreens;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.othman.markit.R;
+import com.othman.markit.firstscreens.groupActivity.GroupNameActivity;
 import com.othman.markit.firstscreens.groupAndItemsClasses.User;
 
 import java.util.ArrayList;
@@ -59,11 +61,18 @@ public class AddFriendActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String friendName=(String)listView.getItemAtPosition(position);
-                HashMap <String,String>hashMap=new HashMap<>();
-                hashMap.put("Friend's name",friendName);
-              databaseReference.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends").child(friendName).setValue(hashMap);
+                String friendName = (String) listView.getItemAtPosition(position);
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("Friend's name", friendName);
+                int num1=1;
+                if (num1!=0) {
+                    databaseReference.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends:").child(Integer.toString(num1)).setValue(hashMap);
+                    num1++;
+                    Intent intenttoG=new Intent(AddFriendActivity.this,GroupNameActivity.class);
+
+                }
             }
+
         });
 
 
