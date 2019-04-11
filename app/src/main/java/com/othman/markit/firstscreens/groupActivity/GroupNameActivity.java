@@ -42,7 +42,7 @@ public class GroupNameActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference groupData;
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter1122;
     ArrayList<String> list = new ArrayList<String>();
     private Button CreateBTN,chooser;
 
@@ -56,7 +56,7 @@ public class GroupNameActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         groupName = (EditText) findViewById(R.id.editText2);
         chooser=(Button)findViewById(R.id.choose);
-        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
+        adapter1122 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
         groupData = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
 
@@ -70,7 +70,6 @@ chooser.setOnClickListener(new View.OnClickListener() {
         addToListMethod();
     }
 });
-
 
 //        imgbtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -117,30 +116,32 @@ chooser.setOnClickListener(new View.OnClickListener() {
 
     public void addToListMethod() {
         String currentid=auth.getCurrentUser().getUid();
-        final int numOFpos=1;
 
-        groupData.child("Users:").child(currentid).child("Friends").child(Integer.toString(numOFpos)).addValueEventListener(new ValueEventListener() {
+
+        groupData.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends:").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (numOFpos!=0) {
-                    adapter.clear();
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    adapter1122.clear();
+                    for (DataSnapshot dataSnapshot1221 : dataSnapshot.getChildren()) {
 
-                        String FriendsFirestName = dataSnapshot1.getValue().toString();
-                        adapter.add(FriendsFirestName);
+                        String FriendsFirestName = dataSnapshot1221.getKey();
+                        adapter1122.add(FriendsFirestName);
 
-                    }
 
                 }
 
-                adapter.notifyDataSetChanged();
+
+                adapter1122.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+
+            });
+
+
     }
 
 

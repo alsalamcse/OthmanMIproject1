@@ -64,14 +64,14 @@ public class AddFriendActivity extends AppCompatActivity {
                 String friendName = (String) listView.getItemAtPosition(position);
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("Friend's name", friendName);
-                int num1=1;
-                if (num1!=0) {
-                    databaseReference.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends:").child(Integer.toString(num1)).setValue(hashMap);
-                    num1++;
+
+
+                    databaseReference.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends:").child(friendName).setValue(hashMap);
+
                     Intent intenttoG=new Intent(AddFriendActivity.this,GroupNameActivity.class);
 
                 }
-            }
+
 
         });
 
