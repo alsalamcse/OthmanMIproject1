@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.othman.markit">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -15,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".firstscreens.MainActivity.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".firstscreens.FirstActivities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,14 +27,13 @@
         </activity>
         <activity android:name=".firstscreens.FirstActivities.SignUpActivity" />
         <activity android:name=".firstscreens.FirstActivities.FirstActivity" />
-        <activity android:name=".firstscreens.appscreens.MainActivity" />
         <activity android:name=".firstscreens.groupActivity.GroupNameActivity" />
         <activity android:name=".firstscreens.appscreens.ShowAllTasksActivity" />
         <activity android:name=".firstscreens.groupActivity.GroupActivity" />
         <activity android:name=".firstscreens.FirstActivities.LogInAcivity" />
         <activity android:name=".firstscreens.appscreens.AddFriendActivity" />
         <activity android:name=".firstscreens.appscreens.UserInfoActivity" />
-        <activity android:name=".firstscreens.groupActivity.AddUsersToGroupActivity"></activity>
+        <activity android:name=".firstscreens.groupActivity.AddUsersToGroupActivity" />
     </application>
 
 </manifest>

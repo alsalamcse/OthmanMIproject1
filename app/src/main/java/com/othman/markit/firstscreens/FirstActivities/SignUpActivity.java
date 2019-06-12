@@ -14,14 +14,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.othman.markit.R;
-import com.othman.markit.firstscreens.appscreens.MainActivity;
-import com.othman.markit.firstscreens.groupAndItemsClasses.User;
+import com.othman.markit.firstscreens.MainActivity.MainActivity;
 
 import java.util.HashMap;
 
@@ -56,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tomain=new Intent(SignUpActivity.this,MainActivity.class);
+                Intent tomain=new Intent(SignUpActivity.this, MainActivity.class);
                 startActivity(tomain);
             }
         });

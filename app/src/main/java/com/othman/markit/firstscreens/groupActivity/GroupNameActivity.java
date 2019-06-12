@@ -51,11 +51,9 @@ public class GroupNameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_name);
-        membersListView = (ListView) findViewById(R.id.membersListView);
-//        imgbtn = (ImageButton) findViewById(R.id.imageButton);
+
         textView = (TextView) findViewById(R.id.textView);
         groupName = (EditText) findViewById(R.id.editText2);
-        chooser=(Button)findViewById(R.id.choose);
         adapter1122 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
         groupData = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
@@ -63,13 +61,32 @@ public class GroupNameActivity extends AppCompatActivity {
         CreateBTN = (Button) findViewById(R.id.CreateBTN);
 
 
-//        getDataUsers();
-chooser.setOnClickListener(new View.OnClickListener() {
+
+//chooser.setOnClickListener(new View.OnClickListener() {
+//    @Override
+//    public void onClick(View v) {
+//        addToListMethod();
+//    }
+//});
+CreateBTN.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        addToListMethod();
+        if (groupName.getText().toString() == null) {
+            groupName.setError("enter the name");
+            Toast.makeText(GroupNameActivity.this, "enter group name please", Toast.LENGTH_SHORT).show();
+
+        } else {
+            String group = groupName.getText().toString();
+            groupData.child("Groups").child(groupName.getText().toString()).setValue(groupName.getText().toString());
+
+            Intent ToGroupAct=new Intent(GroupNameActivity.this,GroupActivity.class);
+            String groupName1=groupName.getText().toString();
+            ToGroupAct.putExtra(groupName1,0);
+
+        }
     }
 });
+
 
 //        imgbtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -78,17 +95,17 @@ chooser.setOnClickListener(new View.OnClickListener() {
 //                startActivity(i);
 //            }
 //        });
-        membersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String groupId=auth.getCurrentUser().getUid();
-                String nameInTheList=(String) membersListView.getItemAtPosition(position);
-                HashMap<String,String> hashMap=new HashMap();
-                hashMap.put("Friend first name and last name",nameInTheList);
-                groupData.child("Groups").child(groupName.getText().toString()).child("Friends").child(nameInTheList).setValue(hashMap);
-
-            }
-        });
+//        membersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String groupId=auth.getCurrentUser().getUid();
+//                String nameInTheList=(String) membersListView.getItemAtPosition(position);
+//                HashMap<String,String> hashMap=new HashMap();
+//                hashMap.put("Friend first name and last name",nameInTheList);
+//                groupData.child("Groups").child(groupName.getText().toString()).child("Friends").child(nameInTheList).setValue(hashMap);
+//
+//            }
+//        });
 
     }
 
@@ -114,35 +131,35 @@ chooser.setOnClickListener(new View.OnClickListener() {
         });
     }
 
-    public void addToListMethod() {
-        String currentid=auth.getCurrentUser().getUid();
+//    public void addToListMethod() {
+//        String currentid=auth.getCurrentUser().getUid();
 
 
-        groupData.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends:").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    adapter1122.clear();
-                    for (DataSnapshot dataSnapshot1221 : dataSnapshot.getChildren()) {
+//        groupData.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends:").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    adapter1122.clear();
+//                    for (DataSnapshot dataSnapshot1221 : dataSnapshot.getChildren()) {
+//
+//                        String FriendsFirestName = dataSnapshot1221.getKey();
+//                        adapter1122.add(FriendsFirestName);
+//
+//
+//                }
+//
+//
+//                adapter1122.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//
+//            });
 
-                        String FriendsFirestName = dataSnapshot1221.getKey();
-                        adapter1122.add(FriendsFirestName);
 
-
-                }
-
-
-                adapter1122.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-            });
-
-
-    }
+//    }
 
 
 //            public void getDataUsers()

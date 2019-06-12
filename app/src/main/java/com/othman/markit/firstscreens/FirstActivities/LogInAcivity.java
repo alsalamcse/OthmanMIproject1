@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.othman.markit.R;
-import com.othman.markit.firstscreens.appscreens.MainActivity;
+import com.othman.markit.firstscreens.MainActivity.MainActivity;
 
 public class LogInAcivity extends AppCompatActivity {
 private EditText email,password;
@@ -70,7 +70,7 @@ FirebaseAuth auth1122;
                 public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(LogInAcivity.this, "Hi hope you enjoy", Toast.LENGTH_SHORT).show();
-                    Intent ToMain=new Intent(LogInAcivity.this,MainActivity.class);
+                    Intent ToMain=new Intent(LogInAcivity.this, MainActivity.class);
                     startActivity(ToMain);
 
                 }

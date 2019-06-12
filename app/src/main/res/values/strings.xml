@@ -32,4 +32,6 @@
     <string name="sittengs">Sittengs</string>
     <string name="select_group_members">select group members:</string>
     <string name="sign_in">Sign in</string>
+    <string name="settings">settings</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
