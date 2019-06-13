@@ -99,6 +99,7 @@ public class AddFriendActivity extends AppCompatActivity {
 //                       }
                        String value=d.child("First name").getValue().toString();
                        String lastName=d.child("Last name").getValue().toString();
+
 //                       String value = d.getValue(String.class);
                        arrayAdapter.add(value +" "+ lastName);
                    }

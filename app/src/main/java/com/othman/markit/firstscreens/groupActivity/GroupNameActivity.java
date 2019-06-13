@@ -81,7 +81,9 @@ CreateBTN.setOnClickListener(new View.OnClickListener() {
 
             Intent ToGroupAct=new Intent(GroupNameActivity.this,GroupActivity.class);
             String groupName1=groupName.getText().toString();
-            ToGroupAct.putExtra(groupName1,0);
+            ToGroupAct.putExtra("v",groupName1);
+            startActivity(ToGroupAct);
+
 
         }
     }

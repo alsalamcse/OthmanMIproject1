@@ -6,11 +6,27 @@ public class ShoppingItem {
 
 
     public String itemName;
-    public Image image;
+    public int itemAmount;
 
     public ShoppingItem(String itemName,Image image){
 
     itemName=this.itemName;
-    this.image=image;
+    itemAmount=this.itemAmount;
+    }
+
+    public int getItemAmount() {
+        return itemAmount;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemAmount(int itemAmount) {
+        this.itemAmount = itemAmount;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }

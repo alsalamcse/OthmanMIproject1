@@ -34,12 +34,12 @@ FirebaseAuth auth;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
-        arrayAdapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.activity_list_item);
+        arrayAdapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1);
         myGroupMembers.setAdapter(arrayAdapter);
         groupRef= FirebaseDatabase.getInstance().getReference().child("Groups");
         myGroupMembers=(ListView)findViewById(R.id.GroupItemsList);
-        Bundle bundle=getIntent().getExtras();
-        final String groupName=bundle.getString("groupName1");
+//        Bundle bundle=getIntent().getExtras();
+        final String groupName=getIntent().getExtras().getString("v");
 
 
         groupRef.child("Users:").child(auth.getCurrentUser().getUid()).child("Friends:").addValueEventListener(new ValueEventListener() {

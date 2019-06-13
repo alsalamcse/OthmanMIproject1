@@ -1,6 +1,8 @@
 package com.othman.markit.firstscreens.MainActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,21 +14,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.othman.markit.R;
+import com.othman.markit.firstscreens.appscreens.AddFriendActivity;
+import com.othman.markit.firstscreens.groupActivity.GroupNameActivity;
+import com.othman.markit.firstscreens.groupActivity.TheItemGroupActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private ListView listView;
+    private ListView listOfGroups;
     private ArrayAdapter<String> arrayAdapter;
     FirebaseAuth auth1122;
-    DatabaseReference groupsInTheDatabase;
-    FirebaseUser user1122;
+    DatabaseReference groupsInTheDatabase,joiningGroups,user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +44,58 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        auth1122=FirebaseAuth.getInstance();
+        listOfGroups=(ListView)findViewById(R.id.listOfGroups);
+        groupsInTheDatabase= FirebaseDatabase.getInstance().getReference().child("Groups");
+        joiningGroups=FirebaseDatabase.getInstance().getReference().child("Groups");
+        user=FirebaseDatabase.getInstance().getReference().child("Users:");
+        final String UserFLName=user.child(auth1122.getCurrentUser().getUid()).child("First name")+" "+user.child(auth1122.getCurrentUser().getUid()).child("Last name");
         arrayAdapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1);
+        listOfGroups.setAdapter(arrayAdapter);
+        groupsInTheDatabase.child("Groups").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (final DataSnapshot group: dataSnapshot.getChildren() ){
+                    String groupn=group.getValue().toString();
+                    arrayAdapter.add(groupn);
+//                    joiningGroups.child("Groups").child("Group members").addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            arrayAdapter.clear();
+//                            for (DataSnapshot userName:dataSnapshot.getChildren()){
+//                                if (UserFLName==userName.getKey()){
+//                                    arrayAdapter.add(group.getKey());
+//
+//
+//                                }
+//                            }
+//                        }
+//
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                        }
+//                    });
 
+                }
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        listOfGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String groupName=(String)listOfGroups.getItemAtPosition(position);
+            Intent ToTheItemGroupActivity=new Intent(MainActivity.this, TheItemGroupActivity.class);
+            ToTheItemGroupActivity.putExtra("t",groupName);
+            startActivity(ToTheItemGroupActivity);
+            }
+        });
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -94,17 +154,24 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_addFriend) {
+            Intent intentToFriend=new Intent(MainActivity.this, AddFriendActivity.class);
+            startActivity(intentToFriend);
+        }
+        else if (id == R.id.nav_createGroup) {
+            Intent intentToGroup=new Intent(MainActivity.this, GroupNameActivity.class);
+            startActivity(intentToGroup);
+        }
+        else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_slideshow) {
+        }
+        else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_manage) {
+        }
+        else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        }
+        else if (id == R.id.nav_send) {
 
         }
 

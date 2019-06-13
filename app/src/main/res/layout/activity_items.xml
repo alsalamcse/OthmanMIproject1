@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".firstscreens.appscreens.ItemsActivity">
+
+    <Button
+        android:id="@+id/Tomatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tomatos"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="50dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Beans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beans"
+        android:textSize="16dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="341dp" />
+
+    <Button
+        android:id="@+id/Ketchup"
+        android:textSize="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ketchup"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="341dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/IceCream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IceCream"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="234dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Orange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Orange"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="142dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Meat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meat"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="50dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Corn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Corn"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="142dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Cucumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cucumber"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="234dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Apple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apple"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="50dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Garlic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Garlic"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="306dp"
+        tools:layout_editor_absoluteY="142dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Rice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rice"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="306dp"
+        tools:layout_editor_absoluteY="234dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Carrot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carrot"
+        android:textSize="16dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="305dp"
+        tools:layout_editor_absoluteY="341dp" />
+</android.support.constraint.ConstraintLayout>
